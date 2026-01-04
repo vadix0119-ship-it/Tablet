@@ -1,0 +1,319 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+:root {
+  --bg: #f2f2f6;
+  --text: #0f1115;
+  --muted: #6b7280;
+  --card: rgba(255, 255, 255, 0.7);
+  --border: rgba(0, 0, 0, 0.05);
+  --shadow: 0 10px 40px rgba(15, 17, 21, 0.15);
+  --accent: #4e8ef7;
+  --blur: 18px;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0e1116;
+  --text: #eef1f6;
+  --muted: #9ca3af;
+  --card: rgba(25, 28, 36, 0.65);
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.65);
+  --accent: #7fb4ff;
+  color-scheme: dark;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(120% 120% at 30% 30%, rgba(255,255,255,0.1), transparent), var(--bg);
+  transition: background-color .2s ease, color .2s ease;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: var(--text);
+}
+
+.tablet-shell {
+  width: 92vw;
+  max-width: 1320px;
+  aspect-ratio: 4 / 3;
+  border-radius: 32px;
+  background: #000;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  position: relative;
+}
+
+.bezel {
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  padding: 12px;
+  background: linear-gradient(145deg, rgba(30,30,34,.85), rgba(10,10,12,.9));
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.08), rgba(0,0,0,0.12)),
+    linear-gradient(135deg, #f97316, #7c3aed);
+}
+
+.status-bar {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.status-bar .indicators {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.card {
+  backdrop-filter: blur(var(--blur));
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+.lockscreen,
+.home,
+.onboarding {
+  position: absolute;
+  inset: 0;
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.center-stack {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+.lock-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.65);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+}
+
+.lock-input {
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(16px);
+  width: 320px;
+  max-width: 70vw;
+}
+
+.lock-input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+}
+
+.button {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, background .2s ease;
+}
+
+.button.primary {
+  background: linear-gradient(135deg, var(--accent), #7f9cfb);
+  color: #fff;
+  border: none;
+  box-shadow: 0 12px 30px rgba(78,142,247,0.35);
+}
+
+.button:active { transform: scale(0.98); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 16px;
+  padding: 12px;
+}
+
+.app-icon {
+  aspect-ratio: 1;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.app-label { font-size: 13px; color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,0.45); }
+
+.dock {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 340px;
+  max-width: 540px;
+  padding: 12px 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(54px, 1fr));
+  gap: 10px;
+  align-items: center;
+  backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+  border-radius: 24px;
+}
+
+.dock .app-icon {
+  border-radius: 18px;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.onboarding-steps {
+  display: flex;
+  gap: 16px;
+}
+
+.onboarding-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.onboarding-right {
+  flex: 1;
+  min-height: 360px;
+}
+
+.list-card {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.list-item {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: var(--card);
+  transition: border-color .15s ease, transform .12s ease;
+}
+
+.list-item.active {
+  border-color: var(--accent);
+  box-shadow: 0 8px 20px rgba(78, 142, 247, 0.25);
+}
+
+.settings-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 16px;
+  height: 100%;
+}
+
+.settings-sidebar {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-panel {
+  padding: 18px;
+  overflow: auto;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+input, select {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+}
+
+.note-editor {
+  width: 100%;
+  min-height: 220px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  padding: 14px;
+  background: var(--card);
+  color: var(--text);
+}
+
+.notification-center {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notification-card {
+  min-width: 240px;
+  padding: 12px 14px;
+  color: var(--text);
+}
